@@ -2,6 +2,9 @@ os: linux
 dist: bionic
 language: bash
 
+git:
+    depth: 3
+
 services:
     - docker
 
@@ -16,31 +19,40 @@ stages:
     - name: deploy
 
 before_install:
-    - echo "Installing pre-dependencies ..."
+    - echo "Dependencies pre-installation commands ..."
 
 install:
-    - echo "Installing dependencies ..."
+    - echo "Dependencies Installation commands ..."
 
 before_script:
-    - echo "Building Docker Image ..."
+    - bash scripts/build_docker_image.sh
 
 jobs:
     include:
         - name: "Testing"
           stage: test
           script:
-              - echo "Running Tests ..."
+              - echo "Docker run commands ..."
+              - echo "Test Run Commands ..."
 
         - name: "Push to Docker Registry"
           stage: push_docker
-          script: echo "Pushing to Docker Hub ..." 
+          script: bash scripts/push_to_docker.sh
 
         - name: "Deploy"
           stage: deploy
+          before_script: skip
           script: echo "Preparing to Deploy ..." 
           before_deploy: echo "Pre-Deploy Commands ..."
           deploy:
               provider: script
               script: bash scripts/deploy.sh
+              on:
+                  branch:
+                      - master
+                      - dev
           after_deploy: echo "Post-Deploy Commands ..."
+
+after_script:
+    - echo "At Last, final commands ..."
 
