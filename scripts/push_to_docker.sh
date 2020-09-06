@@ -22,7 +22,6 @@ if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then
             docker push "vibhu4agarwal/${DOCKER_IMAGE_NAME}:${SHA}"
         fi
 
-
     fi
 
 fi
