@@ -13,9 +13,7 @@ branches:
 stages:
     - name: test
     - name: push_docker
-      if: branch = master
     - name: deploy
-      if: branch = master
 
 before_install:
     - echo "Installing pre-dependencies ..."
@@ -39,6 +37,7 @@ jobs:
         - name: "Deploy"
           stage: deploy
           script: echo "Preparing to Deploy ..." 
+          script: printenv
           before_deploy: echo "Pre-Deploy Commands ..."
           deploy:
               provider: script
