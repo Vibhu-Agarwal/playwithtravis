@@ -1,0 +1,23 @@
+os: linux
+dist: bionic
+language: python
+
+stages:
+    - test
+    - name: deploy
+      if: branch = master
+
+jobs:
+    include:
+        - name: "Job1"
+          stage: test
+          python: '3.8'
+
+        - name: "Job3"
+          stage: test
+
+        - name: "Job2"
+          stage: deploy
+          script: echo "Heyo, from deploy, Job2"
+
+script: "last script"
