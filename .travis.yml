@@ -37,7 +37,7 @@ jobs:
 
         - name: "Push to Docker Registry"
           stage: push_docker
-          script: echo "Push-to-Docker-Registry Commands ..." 
+          script: bash scripts/push_to_docker.sh
 
         - name: "Deploy"
           stage: deploy
