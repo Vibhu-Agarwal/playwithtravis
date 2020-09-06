@@ -12,9 +12,9 @@ branches:
 
 stages:
     - name: test
-    - name: deploy
-      if: branch = master
     - name: push_docker
+      if: branch = master
+    - name: deploy
       if: branch = master
 
 before_install:
@@ -32,11 +32,11 @@ jobs:
           stage: test
           script: echo "Running Tests ..."
 
-        - name: "Deploy"
-          stage: deploy
-          script: echo "Deploying ..." 
-
         - name: "Push to Docker Registry"
           stage: push_docker
           script: echo "Pushing to Docker Hub ..." 
+
+        - name: "Deploy"
+          stage: deploy
+          script: echo "Deploying ..." 
 
