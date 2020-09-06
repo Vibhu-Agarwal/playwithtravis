@@ -1,23 +1,47 @@
 os: linux
 dist: bionic
-language: python
+language: bash
+
+services:
+    - docker
+
+branches:
+    only:
+        - master
+        - dev
 
 stages:
-    - test
+    - name: test
+    - name: push_docker
     - name: deploy
-      if: branch = master
+
+before_install:
+    - echo "Installing pre-dependencies ..."
+
+install:
+    - echo "Installing dependencies ..."
+
+before_script:
+    - echo "Building Docker Image ..."
 
 jobs:
     include:
-        - name: "Job1"
+        - name: "Testing"
           stage: test
-          python: '3.8'
+          script:
+              - echo "Running Tests ..."
+              - echo "Running Tests again ..."
 
-        - name: "Job3"
-          stage: test
+        - name: "Push to Docker Registry"
+          stage: push_docker
+          script: echo "Pushing to Docker Hub ..." 
 
-        - name: "Job2"
+        - name: "Deploy"
           stage: deploy
-          script: echo "Heyo, from deploy, Job2"
+          script: echo "Preparing to Deploy ..." 
+          before_deploy: echo "Pre-Deploy Commands ..."
+          deploy:
+              provider: script
+              script: bash scripts/deploy.sh
+          after_deploy: echo "Post-Deploy Commands ..."
 
-script: "last script"
