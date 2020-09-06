@@ -12,11 +12,9 @@ jobs:
         - name: "Job1"
           stage: test
           python: '3.8'
-          script: echo "Heyo, from test, Job1"
 
         - name: "Job3"
           stage: test
-          script: echo "Heyo, from test, Job3"
 
         - name: "Job2"
           stage: deploy
