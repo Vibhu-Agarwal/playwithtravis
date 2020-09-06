@@ -30,7 +30,6 @@ jobs:
           stage: test
           script:
               - echo "Running Tests ..."
-              - echo "Running Tests again ..."
 
         - name: "Push to Docker Registry"
           stage: push_docker
