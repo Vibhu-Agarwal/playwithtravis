@@ -2,9 +2,8 @@
 
 set -ev
 
-if [ "${TRAVIS_BRANCH}" = "dev" ]; then
-    echo "Build-Docker-Image commands from 'dev' branch"
-elif [ "${TRAVIS_BRANCH}" = "master" ]; then
-    echo "Build-Docker-Image commands from 'master' branch"
+if [ "${TRAVIS_BRANCH}" = "master" ] || [ "${TRAVIS_BRANCH}" = "dev" ]; then
+    docker build -t "${DOCKER_IMAGE_NAME}" .
+    docker images
 fi
 
