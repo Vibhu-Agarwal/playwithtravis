@@ -25,7 +25,7 @@ install:
     - echo "Dependencies Installation commands ..."
 
 before_script:
-    - echo "Docker Image Build (From code) commands ..."
+    - bash scripts/build_docker_image.sh
 
 jobs:
     include:
