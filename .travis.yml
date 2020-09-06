@@ -41,7 +41,7 @@ jobs:
           script: echo "Preparing to Deploy ..." 
           before_deploy: echo "Pre-Deploy Commands ..."
           deploy:
-              skip-cleanup: true
-              script: echo "Actually Deploying ..."
+              provider: script
+              script: bash scripts/deploy.sh
           after_deploy: echo "Post-Deploy Commands ..."
 
