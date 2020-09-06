@@ -1,8 +1,17 @@
 language: python
 python:
     - '3.4'
-    - '3.5'
     - '3.6'
     - '3.8'
-script: echo "Yo, Travis!"
+stages:
+    - test
+    - deploy
+jobs:
+    include:
+        - name: "Job1"
+          stage: test
+          script: "Heyo, from test, Job1"
+        - name: "Job2"
+          stage: deploy
+          script: "Heyo, from deploy, Job2"
 
