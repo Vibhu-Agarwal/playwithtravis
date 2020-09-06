@@ -2,6 +2,9 @@ os: linux
 dist: bionic
 language: bash
 
+git:
+    depth: 3
+
 services:
     - docker
 
