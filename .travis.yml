@@ -2,13 +2,17 @@ language: python
 stages:
     - test
     - name: deploy
-      python:
-          - '3.6'
+
 jobs:
     include:
         - name: "Job1"
           stage: test
           script: echo "Heyo, from test, Job1"
+
+        - name: "Job3"
+          stage: test
+          script: echo "Heyo, from test, Job3"
+
         - name: "Job2"
           stage: deploy
           script: echo "Heyo, from deploy, Job2"
