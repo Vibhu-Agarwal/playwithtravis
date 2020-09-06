@@ -38,5 +38,10 @@ jobs:
 
         - name: "Deploy"
           stage: deploy
-          script: echo "Deploying ..." 
+          script: echo "Preparing to Deploy ..." 
+          before_deploy: echo "Pre-Deploy Commands ..."
+          deploy:
+              skip-cleanup: true
+              script: echo "Actually Deploying ..."
+          after_deploy: echo "Post-Deploy Commands ..."
 
