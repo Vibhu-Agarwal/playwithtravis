@@ -16,24 +16,25 @@ stages:
     - name: deploy
 
 before_install:
-    - echo "Installing pre-dependencies ..."
+    - echo "Dependencies pre-installation commands ..."
 
 install:
-    - echo "Installing dependencies ..."
+    - echo "Dependencies Installation commands ..."
 
 before_script:
-    - echo "Building Docker Image ..."
+    - echo "Docker Image Build (From code) commands ..."
 
 jobs:
     include:
         - name: "Testing"
           stage: test
           script:
-              - echo "Running Tests ..."
+              - echo "Docker run commands ..."
+              - echo "Test Run Commands ..."
 
         - name: "Push to Docker Registry"
           stage: push_docker
-          script: echo "Pushing to Docker Hub ..." 
+          script: echo "Push-to-Docker-Registry Commands ..." 
 
         - name: "Deploy"
           stage: deploy
@@ -44,3 +45,5 @@ jobs:
               script: bash scripts/deploy.sh
           after_deploy: echo "Post-Deploy Commands ..."
 
+after_script:
+    - echo "At Last, final commands ..."
