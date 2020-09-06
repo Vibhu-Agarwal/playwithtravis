@@ -2,22 +2,36 @@ os: linux
 dist: bionic
 language: python
 
+branches:
+    only:
+        - master
+        - dev
+
 stages:
     - test
     - name: deploy
       if: branch = master
+
+before_install:
+    - echo "Building Docker Image ..."
+
+after_install:
+    - echo "Docker Image Built ..."
+    - echo "Running commands post-docker-image-build ..."
 
 jobs:
     include:
         - name: "Job1"
           stage: test
           python: '3.8'
+          before_script: echo "Going to run script ..."
 
         - name: "Job3"
           stage: test
+          before_script: echo "Going to run script ..."
 
         - name: "Job2"
           stage: deploy
-          script: echo "Heyo, from deploy, Job2"
+          script: echo "Deploying ..." 
 
-script: "last script"
+script: echo "last script"
