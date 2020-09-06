@@ -36,8 +36,9 @@ jobs:
 
         - name: "Deploy"
           stage: deploy
-          script: echo "Preparing to Deploy ..." 
-          script: printenv
+          script:
+              - echo "Preparing to Deploy ..."
+              - printenv
           before_deploy: echo "Pre-Deploy Commands ..."
           deploy:
               provider: script
