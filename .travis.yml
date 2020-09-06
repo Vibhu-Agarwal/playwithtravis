@@ -41,12 +41,18 @@ jobs:
 
         - name: "Deploy"
           stage: deploy
+          before_script: skip
           script: echo "Preparing to Deploy ..." 
           before_deploy: echo "Pre-Deploy Commands ..."
           deploy:
               provider: script
               script: bash scripts/deploy.sh
+              on:
+                  branch:
+                      - master
+                      - dev
           after_deploy: echo "Post-Deploy Commands ..."
 
 after_script:
     - echo "At Last, final commands ..."
+
